@@ -1,7 +1,8 @@
 from aiogram import Dispatcher, types
 from config import bot, dp
 from Database import db
-from keyboards.buttons import yes_answer, not_answer, correct_answer, incorrect_answer, third_answer, answer_third
+from keyboards.buttons import (yes_answer, not_answer, correct_answer,
+                               incorrect_answer, third_answer, answer_third)
 from keyboards import buttons
 
 @dp.callback_query_handler(lambda c: c.data == 'start_questionary')
