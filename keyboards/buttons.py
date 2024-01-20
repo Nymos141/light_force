@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import types
 from config import bot
+from Database import db
 
 
 async def keyboard():
@@ -9,7 +10,12 @@ async def keyboard():
         'LETS GET STARTED!',
         callback_data='start_questionary'
     )
-    markup.add(button)
+
+    check_ban_button = InlineKeyboardButton(
+        'status',
+        callback_data='status'
+    )
+    markup.add(button, check_ban_button)
     return markup
 
 

@@ -2,7 +2,7 @@ from aiogram import Dispatcher, Bot, types
 from config import bot, MEDIA_DESTINATION
 from Database import db
 from keyboards import buttons
-from python_file import START_COMMAND
+from const import START_COMMAND
 
 async def start_massage(message: types.Message):
     data = db.DATABASE()
@@ -15,13 +15,13 @@ async def start_massage(message: types.Message):
     print(message)
     with open(MEDIA_DESTINATION + "js.jpg", 'rb') as photo:
         await bot.send_photo(
-            chat_id=message.from_user.id,
+            chat_id=message.chat.id,
             photo=photo,
             caption=START_COMMAND.format(
                 name=message.from_user.first_name
-            )
+            ),
+            reply_markup=await buttons.keyboard()
         )
-        reply_markup = await buttons.keyboard()
 
 
 def start_chat(dp: Dispatcher):
