@@ -15,7 +15,12 @@ async def keyboard():
         'status',
         callback_data='status'
     )
-    markup.add(button, check_ban_button)
+
+    registration_button = InlineKeyboardButton(
+        'Registration',
+        callback_data='Registration'
+    )
+    markup.add(button, check_ban_button, registration_button)
     return markup
 
 

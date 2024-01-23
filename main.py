@@ -1,6 +1,6 @@
 from aiogram import executor
 from config import dp
-from Handlers import START, questionnaire, chat_actions
+from Handlers import START, questionnaire, chat_actions, registration
 from Database import db
 
 async def on_startup(_):
@@ -9,6 +9,7 @@ async def on_startup(_):
 
     START.start_chat(dp=dp)
     await chat_actions.register_ban_words_handlers(dp=dp)
+    registration.register_registration(dp=dp)
 
 if __name__ == '__main__':
     executor.start_polling(
