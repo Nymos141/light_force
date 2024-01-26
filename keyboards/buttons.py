@@ -20,7 +20,52 @@ async def keyboard():
         'Registration',
         callback_data='Registration'
     )
-    markup.add(button, check_ban_button, registration_button)
+
+    profile_button = InlineKeyboardButton(
+        'display profile',
+        callback_data='display profile'
+    )
+
+    all_profile_button = InlineKeyboardButton(
+        'Start dating',
+        callback_data='Start dating'
+    )
+    info_button = InlineKeyboardButton(
+        'menu of destinations',
+        callback_data='menu of destinations'
+    )
+    markup.add(button, check_ban_button, registration_button,
+               profile_button, all_profile_button, info_button)
+    return markup
+
+
+async def referral_keyboard():
+    markup = InlineKeyboardMarkup()
+    reference_button = InlineKeyboardButton(
+        "Generate Link ",
+        callback_data="Generate_link"
+    )
+
+    reference_list_button = InlineKeyboardButton(
+        "list reference ",
+        callback_data="list reference "
+    )
+    markup.add(reference_button, reference_list_button)
+    return markup
+
+
+async def like_dislike_buttons(owner):
+    markup = InlineKeyboardMarkup()
+    like_button = InlineKeyboardButton(
+        'Like👍',
+        callback_data=f'Like {owner}'
+    )
+
+    dislike_button = InlineKeyboardButton(
+        'DisLike👎',
+        callback_data=f'DisLike_ {owner}'
+    )
+    markup.add(like_button, dislike_button)
     return markup
 
 

@@ -14,3 +14,7 @@ PROFILE_TEXT = "Nickname: {nickname}\n" \
                "Blood type: {blood_type}\n"\
                "favorite car: {favorite_car}\n"\
 
+REFERENCE_TEXT = 'HI {name}\n'\
+    'double_select_referral\n'\
+    'balance: {balance}\n'\
+    'total reference: {total_reference}'
