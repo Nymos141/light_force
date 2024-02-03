@@ -1,8 +1,7 @@
-import httpx
-import asyncio
+import requests
 from parsel import Selector
 
-class AsyncScraper:
+class Scraper:
     NEWS_URL = "https://www.france24.com/en/"
     HEADERS = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
@@ -14,15 +13,10 @@ class AsyncScraper:
     LINK_XPATH = '//div[@class="article__title "]/a/@href'
     IMG_XPATH = '//figure[@class="m-figure m-figure--16x9"]//img/@src'
 
-    async def fetch(self, url):
-        async with httpx.AsyncClient() as client:
-            response = await client.get(url, headers=self.HEADERS)
-            return response.text
+    def parse(self):
+        text = requests.get(url=self.NEWS_URL, headers=self.HEADERS).text
 
-    async def parse(self, url):
-        html = await self.fetch(url)
-        tree = Selector(text=html)
-
+        tree = Selector(text=text)
         links = tree.xpath(self.LINK_XPATH).getall()
         img_urls = tree.xpath(self.IMG_XPATH).getall()
 
@@ -36,11 +30,3 @@ class AsyncScraper:
             news_data.append(news_entry)
 
         return news_data
-
-    async def scrape(self):
-        return await self.parse(self.NEWS_URL)
-
-
-if __name__ == "__main__":
-    scraper = AsyncScraper()
-    asyncio.run(scraper.scrape())

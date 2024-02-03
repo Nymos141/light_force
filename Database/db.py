@@ -16,12 +16,17 @@ class DATABASE:
             self.connection.execute(sql.create_telegram_user_link_table)
             self.connection.execute(sql.CREATE_DISLIKE_TABLE_PROFILE)
             self.connection.execute(sql.CREATE_REFERENCE_USERS_TABLE)
-
+            self.connection.execute(sql.create_news_link_table)
             try:
                 self.connection.execute(sql.alter_user_table)
+            except sqlite3.OperationalError:
+                pass
+
+            try:
                 self.connection.execute(sql.alter_userbalance_table)
             except sqlite3.OperationalError:
                 pass
+
             self.connection.commit()
 
     def insert_users_tg(self, Telegram_id, username, first_name, last_name):
@@ -164,5 +169,10 @@ class DATABASE:
             (owner_telegram_id,)
         ).fetchall()
 
-
+    def insert_news_scrap(self, telegram_id, news_link):
+        self.cursor.execute(
+            sql.insert_news,
+            (None, telegram_id, news_link)
+        )
+        self.connection.commit()
 

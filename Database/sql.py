@@ -5,18 +5,20 @@ CREATE TABLE IF NOT EXISTS tg_users (
     user_name VARCHAR(50), 
     first_name VARCHAR(50), 
     last_name VARCHAR(50),
+    reference_link TEXT,
+    balance INTEGER,
     UNIQUE (Telegram_id)
 )
 """
 
-
 alter_user_table = """
-alter table tg_users add column reference_link text
+ALTER TABLE tg_users ADD COLUMN reference_link TEXT;
 """
 
 alter_userbalance_table = """
-alter table tg_users add column balance integer
+ALTER TABLE tg_users ADD COLUMN balance INTEGER;
 """
+
 
 double_select_referral = """
 SELECT
@@ -31,7 +33,7 @@ WHERE
 """
 
 insert_telegram_users = """
-INSERT OR IGNORE INTO tg_users VALUES (?,?,?,?,?,?)
+INSERT OR IGNORE INTO tg_users VALUES (?,?,?,?,?,?,?)
 """
 
 
@@ -115,7 +117,7 @@ INSERT INTO dislike_profile values (?,?,?)
 """
 
 FILTER_LEFT_JOIN_PROFILE = """
-SELECT * FROM telegram_users_profile 
+SELECT * FROM telegram_users_profile
 LEFT JOIN like_profile ON telegram_users_profile.TELEGRAM_ID = like_profile.OWNER_TELEGRAM_ID
     AND like_profile.LIKE_TELEGRAM_ID = ?
 LEFT JOIN dislike_profile ON telegram_users_profile.TELEGRAM_ID = dislike_profile.OWNER_TELEGRAM_ID
@@ -151,10 +153,23 @@ select * from telegram_users_profile
 """
 
 select_tg_users = """
-select * from tg_users where Telegram_ID = ?  
+select * from tg_users where Telegram_ID = ?
 """
 
 update_tg_users = """
 update tg_users set reference_link = ? where TELEGRAM_ID = ?
+"""
+
+create_news_link_table = """
+create table if not exists news_link
+(
+id integer primary key,
+telegram_id integer,
+link text
+)
+"""
+
+insert_news = """
+INSERT INTO news_link VALUES (?, ?, ?)
 """
 

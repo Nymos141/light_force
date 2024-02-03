@@ -34,8 +34,13 @@ async def keyboard():
         'menu of destinations',
         callback_data='menu of destinations'
     )
+
+    news_button = InlineKeyboardButton(
+        'last news',
+        callback_data='last news'
+    )
     markup.add(button, check_ban_button, registration_button,
-               profile_button, all_profile_button, info_button)
+               profile_button, all_profile_button, info_button, news_button)
     return markup
 
 
