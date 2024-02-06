@@ -3,7 +3,7 @@ from config import bot, MEDIA_DESTINATION
 from Database import db
 from keyboards import buttons
 from const import START_COMMAND
-from SCRAPING.scraping import Scraper
+
 
 
 async def start_massage(message: types.Message):
