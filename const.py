@@ -1,6 +1,6 @@
 START_COMMAND = "Hi {name}\n" \
     "I'm a bot that's been following you.\n"\
-    "in this chat room, watch your language or I'll have you banned.\n"\
+
 
 BAN_USER_TEXT = "USER {name}\n"\
     "you bad boy\n"\
@@ -18,3 +18,5 @@ REFERENCE_TEXT = 'HI {name}\n'\
     'double_select_referral\n'\
     'balance: {balance}\n'\
     'total reference: {total_reference}'
+
+

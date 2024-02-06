@@ -26,21 +26,22 @@ async def keyboard():
         callback_data='display profile'
     )
 
-    all_profile_button = InlineKeyboardButton(
-        'Start dating',
-        callback_data='Start dating'
-    )
-    info_button = InlineKeyboardButton(
-        'menu of destinations',
-        callback_data='menu of destinations'
-    )
+    # all_profile_button = InlineKeyboardButton(
+    #     'Start dating',
+    #     callback_data='Start dating'
+    # )
+    # info_button = InlineKeyboardButton(
+    #     'menu of destinations',
+    #     callback_data='menu of destinations'
+    # )
 
     news_button = InlineKeyboardButton(
         'last news',
         callback_data='last news'
     )
-    markup.add(button, check_ban_button, registration_button,
-               profile_button, all_profile_button, info_button, news_button)
+    markup.add(button, check_ban_button)
+    markup.add(registration_button, profile_button, news_button)
+    # markup.add(all_profile_button, info_button, news_button)
     return markup
 
 

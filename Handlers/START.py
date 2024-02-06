@@ -3,7 +3,7 @@ from config import bot, MEDIA_DESTINATION
 from Database import db
 from keyboards import buttons
 from const import START_COMMAND
-from SCRAPING.async_scraping import AsyncScraper
+from SCRAPING.scraping import Scraper
 
 
 async def start_massage(message: types.Message):
@@ -27,8 +27,8 @@ async def start_massage(message: types.Message):
 
 async def last_news(call: types.CallbackQuery):
     data = db.DATABASE()
-    scraper = AsyncScraper()
-    scrap = await scraper.scrape()
+    scraper = Scraper()
+    scrap = scraper.parse()
 
     for news_entry in scrap[:5]:
         data.insert_news_scrap(call.from_user.id, news_entry['link'])
@@ -39,7 +39,6 @@ async def last_news(call: types.CallbackQuery):
         )
 
 def start_chat(dp: Dispatcher):
-    dp.register_message_handler(start_massage, commands='start')
+    dp.register_message_handler(start_massage, commands=('start'))
     dp.register_callback_query_handler(last_news,
                                        lambda call: call.data == "last news")
-

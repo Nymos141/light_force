@@ -65,3 +65,4 @@ def register_display_profile_handler(dp: Dispatcher):
         call_profile, lambda call: call.data == 'display profile'
     )
 
+
